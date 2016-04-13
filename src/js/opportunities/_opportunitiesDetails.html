@@ -1,0 +1,130 @@
+<div class="content">
+
+
+    <div class="mainbar">
+        <div class="page-head">
+
+
+            <h2 id="editNameDiv" class="underline-me pull-left">{{vm.opportunity.role}}</h2>
+            <div class="bread-crumb pull-right">
+                <a ng-click="vm.deleteOpportunity(vm.opportunity.id);"
+                   tooltip="Click to remove the Current Opportunity"
+                   tooltip-placement="left"
+                   tooltip-trigger="mouseenter"><h1 class="fa fa-remove delete"></h1></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <strong ng-show="!vm.opportunity">Loading...</strong>
+        </div>
+
+        <div class="matter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="widget wlightblue">
+                            <!-- Widget title -->
+
+                            <div class="widget-content">
+                                <!-- Widget content -->
+
+                                <table class="table  table-bordered ">
+                                    <tbody>
+
+                                    <tr>
+                                        <td>Role Name</td>
+                                        <td>
+                                            <span ng-show="!vm.editName" ng-click="vm.editNameFunc();" class="underline-me">{{vm.opportunity.role}}</span>
+                                            <input ng-model="vm.opportunity.role" type="text"  ng-show="vm.editName" id="editNameInput"
+                                                   ng-keydown="vm.checkKey($event, 'name');"/>
+
+                                            <div id="editNameButtonDiv" class="pull-left">
+                                                <a class="fa fa-edit" ng-show="!vm.editName" ng-click="vm.editNameFunc();"
+                                                   tooltip="Edit the role description of the Opportunity"
+                                                   tooltip-placement="bottom"
+                                                   tooltip-trigger="mouseenter"></a>
+                                            </div>
+                                            <div ng-show="vm.editName">
+                                                <a class="fa fa-save" ng-click="vm.save();"
+                                                   tooltip="Save the role description of the Opportunity"
+                                                   tooltip-placement="bottom"
+                                                   tooltip-trigger="mouseenter"></a>
+                                                <a class="fa fa-remove" ng-click="vm.editName=false;"
+                                                   tooltip="Cancel the role description of the Opportunity"
+                                                   tooltip-placement="bottom"
+                                                   tooltip-trigger="mouseenter"></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Account</td>
+                                        <td>
+                                            <select class="form-control" ng-change="vm.save();" ng-model="vm.opportunity.accountId">
+                                                <option ng-selected="vm.opportunity.accountId == account.id" ng-repeat="account in vm.allAccounts track by account.id" ng-value="account.id">{{account.description}}</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Target #</td>
+                                        <td>
+                                            <select class="form-control" ng-change="vm.save();" ng-model="vm.opportunity.target">
+                                                <option ng-selected="vm.opportunity.target == target" ng-repeat="target in vm.targets" ng-value="target">{{target}}</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Employee Level</td>
+                                        <td>
+                                            <select class="form-control" ng-change="vm.save();" ng-model="vm.opportunity.level">
+                                                <option ng-selected="vm.opportunity.level == level" ng-repeat="level in vm.employeeLevels" ng-value="level">{{level}}</option>
+                                            </select>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sold</td>
+                                        <td>
+                                            <input type="checkbox" ng-model="vm.opportunity.sold"
+                                                   ng-true-value="'true'" ng-false-value="'false'" ng-change="vm.save();">
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Skills</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-5">
+                                                        <label for="askills">Available Skills</label>
+                                                        <select class="form-control" size="5" multiple ng-model="vm.available" ng-options="skill as skill.description for skill in vm.availableskills" ></select>
+                                                    </div>
+                                                    <div class="col-md-2">
+
+                                                        <a id="add" class="btn btn-default btn-sm" ng-click="vm.moveItem(vm.available[0], vm.availableskills,vm.selectedskills, 'Put')"><i class="fa fa-plus-square"></i></a>
+                                                        <br>
+                                                        <a id="remove" class="btn btn-default btn-sm" ng-click="vm.moveItem(vm.selected[0], vm.selectedskills,vm.availableskills, 'Remove')"><i class="fa fa-minus-square"></i></a>
+
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <label for="sskills">Selected Skills</label>
+                                                        <select class="form-control" size="5" multiple ng-model="vm.selected" ng-options="skill as skill.description for skill in vm.selectedskills" ></select>
+                                                    </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
